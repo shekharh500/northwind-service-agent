@@ -1,0 +1,68 @@
+{
+  "dataSpaceScopeId": "9gTXXXXXXXXXXXXXXX",
+  "description": "Northwind Home warranty, returns and refunds, Aura T200 manual and CarePlus SLA PDFs for the Northwind Service Agent.",
+  "developerName": "Northwind_Home_Docs",
+  "featureAssignments": [],
+  "fileAdlMode": 3,
+  "groundingSource": {
+    "groundingFileRefs": [
+      {
+        "createdBy": "Admin User",
+        "createdById": "005XXXXXXXXXXXXXXX",
+        "createdDate": "Mon Sep 14 16:54:31 GMT 2026",
+        "fileId": "1JcXXXXXXXXXXXXXXX",
+        "fileName": "01-warranty-policy.pdf",
+        "filePath": "$agentforce_data_library$/1JDXXXXXXXXXXXXXXX/01-warranty-policy.pdf",
+        "fileSize": 70514,
+        "groundingSourceId": "1JaXXXXXXXXXXXXXXX",
+        "status": "INDEXED"
+      },
+      {
+        "createdBy": "Admin User",
+        "createdById": "005XXXXXXXXXXXXXXX",
+        "createdDate": "Tue Sep 15 05:34:10 GMT 2026",
+        "fileId": "1JcXXXXXXXXXXXXXXX",
+        "fileName": "04-careplus-service-plans-sla.pdf",
+        "filePath": "$agentforce_data_library$/1JDXXXXXXXXXXXXXXX/04-careplus-service-plans-sla.pdf",
+        "fileSize": 68462,
+        "groundingSourceId": "1JaXXXXXXXXXXXXXXX",
+        "status": "INDEXED"
+      },
+      {
+        "createdBy": "Admin User",
+        "createdById": "005XXXXXXXXXXXXXXX",
+        "createdDate": "Tue Sep 15 01:39:17 GMT 2026",
+        "fileId": "1JcXXXXXXXXXXXXXXX",
+        "fileName": "03-aura-thermostat-t200-manual.pdf",
+        "filePath": "$agentforce_data_library$/1JDXXXXXXXXXXXXXXX/03-aura-thermostat-t200-manual.pdf",
+        "fileSize": 71456,
+        "groundingSourceId": "1JaXXXXXXXXXXXXXXX",
+        "status": "INDEXED"
+      },
+      {
+        "createdBy": "Admin User",
+        "createdById": "005XXXXXXXXXXXXXXX",
+        "createdDate": "Tue Sep 15 05:34:10 GMT 2026",
+        "fileId": "1JcXXXXXXXXXXXXXXX",
+        "fileName": "02-returns-refunds-policy.pdf",
+        "filePath": "$agentforce_data_library$/1JDXXXXXXXXXXXXXXX/02-returns-refunds-policy.pdf",
+        "fileSize": 68616,
+        "groundingSourceId": "1JaXXXXXXXXXXXXXXX",
+        "status": "INDEXED"
+      }
+    ],
+    "groundingSourceType": "SFDRIVE",
+    "indexMode": "ENHANCED",
+    "totalFileCount": 4
+  },
+  "libraryId": "1JDXXXXXXXXXXXXXXX",
+  "masterLabel": "Northwind Home Docs",
+  "retriever": {
+    "id": "1CxXXXXXXXXXXXXXXX",
+    "label": "File_Northwind_Home_Docs"
+  },
+  "retrieverId": "1CxXXXXXXXXXXXXXXX",
+  "retrieverLabel": "File_Northwind_Home_Docs",
+  "sourceType": "SFDRIVE",
+  "status": "READY"
+}

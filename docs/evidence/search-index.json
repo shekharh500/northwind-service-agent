@@ -1,0 +1,282 @@
+{
+  "attachmentDmoDeveloperName": null,
+  "attachmentDmoId": null,
+  "attachmentDmoName": null,
+  "chunkDmoDeveloperName": "ADL_Northwind_Home_chunk__dlm",
+  "chunkDmoId": "0gjXXXXXXXXXXXXXXX",
+  "chunkDmoName": "ADL_Northwind_Home chunk",
+  "chunkingConfiguration": {
+    "fieldLevelConfigurations": [],
+    "perFileExtension": [
+      {
+        "config": {
+          "conversationFields": null,
+          "id": "section_aware_chunking",
+          "userValues": [
+            {
+              "id": "max_tokens",
+              "value": "512"
+            },
+            {
+              "id": "overlap_tokens",
+              "value": "0"
+            }
+          ]
+        },
+        "decorators": [],
+        "fileExtension": "html"
+      },
+      {
+        "config": {
+          "conversationFields": null,
+          "id": "section_aware_chunking",
+          "userValues": [
+            {
+              "id": "max_tokens",
+              "value": "512"
+            },
+            {
+              "id": "overlap_tokens",
+              "value": "0"
+            }
+          ]
+        },
+        "decorators": [],
+        "fileExtension": "txt"
+      },
+      {
+        "config": {
+          "conversationFields": null,
+          "id": "passage_extraction",
+          "userValues": [
+            {
+              "id": "strip_html",
+              "value": "true"
+            },
+            {
+              "id": "max_tokens",
+              "value": "512"
+            }
+          ]
+        },
+        "decorators": [],
+        "fileExtension": "aspx"
+      },
+      {
+        "config": {
+          "conversationFields": null,
+          "id": "passage_extraction",
+          "userValues": [
+            {
+              "id": "strip_html",
+              "value": "true"
+            },
+            {
+              "id": "max_tokens",
+              "value": "512"
+            }
+          ]
+        },
+        "decorators": [],
+        "fileExtension": "log"
+      },
+      {
+        "config": {
+          "conversationFields": null,
+          "id": "section_aware_chunking",
+          "userValues": [
+            {
+              "id": "max_tokens",
+              "value": "512"
+            },
+            {
+              "id": "overlap_tokens",
+              "value": "0"
+            }
+          ]
+        },
+        "decorators": [],
+        "fileExtension": "pdf"
+      },
+      {
+        "config": {
+          "conversationFields": null,
+          "id": "section_aware_chunking",
+          "userValues": [
+            {
+              "id": "max_tokens",
+              "value": "512"
+            },
+            {
+              "id": "overlap_tokens",
+              "value": "0"
+            }
+          ]
+        },
+        "decorators": [],
+        "fileExtension": "text"
+      }
+    ]
+  },
+  "dataspace": "default",
+  "description": null,
+  "developerName": "ADL_Northwind_Home",
+  "id": "18lXXXXXXXXXXXXXXX",
+  "indexConfiguration": null,
+  "indexRefreshedOn": "2026-09-14T16:56:34.000Z",
+  "label": "ADL_Northwind_Home",
+  "parsingConfigurations": [],
+  "postProcessingConfigurations": [],
+  "preProcessingConfigurations": [
+    {
+      "config": {
+        "conversationFields": null,
+        "id": "pre_process_infographics_using_llm",
+        "userValues": [
+          {
+            "id": "llm_model",
+            "value": "GPT-4o"
+          },
+          {
+            "id": "prompt",
+            "value": "You are a Document AI assistant helping extract high-quality, structured text from a document image. The output will be used in a Retrieval-Augmented Generation (RAG) system.\n\nYour goal is to extract all meaningful textual and structural information from the image and rewrite it into well-formed, logically ordered paragraphs and bullets.\n\n\n### Detailed instructions:\n1. **Use only the information visibly present in the image. Do not guess, hallucinate, or make assumptions.**\n2. Convert all content into grammatically correct, complete sentences. Expand shorthand or abbreviations when clearly implied.\n3. For **section titles or headers**, wrap the text with double asterisks like this: `**Header Text**`. Do the same for subheadings if visually distinguishable.\n4. For **tables**, do not recreate the table. Instead:\n   - Convert rows into bullet points or sentence summaries.\n   - Group bullets under relevant bolded headers if the table implies sections.\n   - Use phrasing like &quot;The [row label] has...&quot; to describe each row.\n   - Preserve the backgroundcolors of the cells and any text present in the cells.\n   - For complex tables with multiple rows and columns, save information of each row along with their headers seperately. \n   - For merged headers or columns, add that information to each sub column name. \n\n5. For flowcharts follow the following instructions\n   - Use formats like &quot;Step 1: ..., Step 2: ...&quot; or &quot;If X, then Y.&quot;\n   - Focus on decisions, branches, or process flows shown.\n   - **Bold the name of the process or main decision block if applicable.**\n   - Preserve the layout and structure of the flowchart, identifying the nodes and connections and saving the information in the exact order as it is in the image.\n   - Save all the text information available in the flowchart without missing any information.\n   - Extract the complete structural and semantic information from the flowchart including all nodes, text, and connectors.\n   - Core Requirements:\n        - Node Detection &amp; Text Extraction:\n\n        1. Identify all distinct shapes/nodes (e.g., rectangles, diamonds, ovals, parallelograms) in the flowchart.\n\n        2.  Extract all text contained within each node and associate it correctly with that node.\n\n        3. Identify the type of node if possible (e.g., &#39;Process&#39;, &#39;Decision&#39;, &#39;Start/End&#39;).\n\n        - Connector (Arrow) Detection:\n\n        1. Detect all lines and **arrows** that connect the nodes.\n\n        2. For each connector, determine its path (e.g., a series of points or vector data).\n\n        3. Identify the directionality (i.e., locate the arrowhead).\n\n        4. Extract any text associated with a connector (e.g., &#39;Yes&#39;, &#39;No&#39; labels on decision paths).\n\n        5. Save the information of arrows and their directionality in the output.\n\n        - Structural Relationship Mapping:\n\n        1. Accurately map the relationships between nodes.\n\n        2.The output must clearly define which node is the source (origin) and which node is the target (destination) for every connector.\n\n        3.Handle complex structures like branches (one-to-many) and merges (many-to-one)\n\n        - Grid Structure Detection (The Framework):\n\n        1. Rows (Swimlanes): Identify the horizontal swimlanes. Extract the label for each row from the far-left column.\n\n        2. Columns (Phases): Identify the vertical phases. Extract the label for each column from the top header.\n\n        3. Cell Mapping: Create a virtual grid and determine the bounding box for each logical cell.\n\n        4. Legend &amp; Element Classification: Parse the Legend: First, find and parse the &quot;Legend&quot; box. Create a key-value map of the icons/shapes to their meaning.\n    - Preserve all of this information in the output and ensure you dont miss out on any text.\n    - Also ensure that all connections and directional information is mentioned where we specify the text for each node and not seperately as it would be split when chunking happens.\n    - All the upward and downward directionalarrows and directions should be clearly stated such that hierarchical structure is maintained.\n\n6. **Never refer to the image** (e.g., &quot;in the image above&quot;) or add extra commentary.\n7. If something is marked &quot;same as above&quot; or left blank, restate the full context from earlier.\n8. If visual structure is ambiguous, default to writing clearly grouped bullet points or narrative paragraphs based on spatial layout.\n9. Ensure the final output consists of a clean sequence of paragraphs, optionally mixed with bullets, suitable for ingestion into an LLM-based search system.\n10. URLs, links, file paths, email addresses, and alphanumeric codes must be transcribed exactly as shown, character-by-character. Do not expand, shorten, correct, auto-complete, or insert additional words into any part of a URL or path. This rule overrides instruction #2.\n\n**Do not translate the content. Maintain the original language as present in the image.**\nYour final response should be clear, unambiguous, and completely based on the content shown.\n\n"
+          }
+        ]
+      },
+      "fileExtensions": [
+        "pdf",
+        "html",
+        "rtf",
+        "docx",
+        "pptx"
+      ],
+      "sourceDmoDeveloperName": "ADL_Northwind_Home__dlm",
+      "sourceDmoFieldDeveloperName": "ResolvedFilePath__c"
+    }
+  ],
+  "processingType": "REALTIME",
+  "rankingConfigurations": [],
+  "ruleConfiguration": null,
+  "runtimeStatus": "READY",
+  "searchType": "HYBRID",
+  "semanticSearchRankingConfigurations": [],
+  "sourceDmoDeveloperName": "ADL_Northwind_Home__dlm",
+  "sourceDmoId": "0gjXXXXXXXXXXXXXXX",
+  "sourceRecordLastModifiedField": null,
+  "transcribeDmoDeveloperName": null,
+  "transcribeDmoId": null,
+  "transcribeDmoName": null,
+  "transformConfigurations": [
+    {
+      "fileLevelConfiguration": [
+        {
+          "config": {
+            "conversationFields": null,
+            "id": "tesseract",
+            "userValues": [
+              {
+                "id": "image_ocr",
+                "value": "false"
+              }
+            ]
+          },
+          "fileExtensions": [
+            "jpeg",
+            "png",
+            "jpg",
+            "pdf",
+            "docx"
+          ]
+        }
+      ],
+      "transformType": "IMAGE"
+    },
+    {
+      "fileLevelConfiguration": [
+        {
+          "config": {
+            "conversationFields": null,
+            "id": "gpt-4o",
+            "userValues": [
+              {
+                "id": "image_captioning",
+                "value": "false"
+              },
+              {
+                "id": "captioning_prompt",
+                "value": "You are a Document AI assistant helping extract high-quality, structured text from a document image. The output will be used in a Retrieval-Augmented Generation (RAG) system.\n\nYour goal is to extract all meaningful textual and structural information from the image and rewrite it into well-formed, logically ordered paragraphs and bullets.\n\n### Detailed instructions:\n\n1. **Use only the information visibly present in the image. Do not guess, hallucinate, or make assumptions.**\n\n2. Convert all content into grammatically correct, complete sentences. Expand shorthand or abbreviations when clearly implied.\n\n3. For **section titles or headers**, wrap the text with double asterisks like this: `**Header Text**`. Do the same for subheadings if visually distinguishable.\n\n4. For **tables**, do not recreate the table. Instead:\n\n   - Convert rows into bullet points or sentence summaries.\n\n   - Group bullets under relevant bolded headers if the table implies sections.\n\n   - Use phrasing like &quot;The [row label] has...&quot; to describe each row.\n\n   - Preserve the backgroundcolors of the cells and any text present in the cells.\n\n   - For complex tables with multiple rows and columns, save information of each row along with their headers seperately.\n\n   - For merged headers or columns, add that information to each sub column name.\n\n5. For flowcharts follow the following instructions\n\n   - Use formats like &quot;Step 1: ..., Step 2: ...&quot; or &quot;If X, then Y.&quot;\n\n   - Focus on decisions, branches, or process flows shown.\n\n   - **Bold the name of the process or main decision block if applicable.**\n\n   - Preserve the layout and structure of the flowchart, identifying the nodes and connections and saving the information in the exact order as it is in the image.\n\n   - Save all the text information available in the flowchart without missing any information.\n\n   - Extract the complete structural and semantic information from the flowchart including all nodes, text, and connectors.\n\n   - Core Requirements:\n\n        - Node Detection &amp; Text Extraction:\n\n        1. Identify all distinct shapes/nodes (e.g., rectangles, diamonds, ovals, parallelograms) in the flowchart.\n\n        2.  Extract all text contained within each node and associate it correctly with that node.\n\n        3. Identify the type of node if possible (e.g., &#39;Process&#39;, &#39;Decision&#39;, &#39;Start/End&#39;).\n\n        - Connector (Arrow) Detection:\n\n        1. Detect all lines and **arrows** that connect the nodes.\n\n        2. For each connector, determine its path (e.g., a series of points or vector data).\n\n        3. Identify the directionality (i.e., locate the arrowhead).\n\n        4. Extract any text associated with a connector (e.g., &#39;Yes&#39;, &#39;No&#39; labels on decision paths).\n\n        5. Save the information of arrows and their directionality in the output.\n\n        - Structural Relationship Mapping:\n\n        1. Accurately map the relationships between nodes.\n\n        2.The output must clearly define which node is the source (origin) and which node is the target (destination) for every connector.\n\n        3.Handle complex structures like branches (one-to-many) and merges (many-to-one)\n\n        - Grid Structure Detection (The Framework):\n\n        1. Rows (Swimlanes): Identify the horizontal swimlanes. Extract the label for each row from the far-left column.\n\n        2. Columns (Phases): Identify the vertical phases. Extract the label for each column from the top header.\n\n        3. Cell Mapping: Create a virtual grid and determine the bounding box for each logical cell.\n\n        4. Legend &amp; Element Classification: Parse the Legend: First, find and parse the &quot;Legend&quot; box. Create a key-value map of the icons/shapes to their meaning.\n\n    - Preserve all of this information in the output and ensure you dont miss out on any text.\n\n    - Also ensure that all connections and directional information is mentioned where we specify the text for each node and not seperately as it would be split when chunking happens.\n\n    - All the upward and downward directionalarrows and directions should be clearly stated such that hierarchical structure is maintained.\n\n6. **Never refer to the image** (e.g., &quot;in the image above&quot;) or add extra commentary.\n\n7. If something is marked &quot;same as above&quot; or left blank, restate the full context from earlier.\n\n8. If visual structure is ambiguous, default to writing clearly grouped bullet points or narrative paragraphs based on spatial layout.\n\n9. Ensure the final output consists of a clean sequence of paragraphs, optionally mixed with bullets, suitable for ingestion into an LLM-based search system.\n\n10. URLs, links, file paths, email addresses, and alphanumeric codes must be transcribed exactly as shown, character-by-character. Do not expand, shorten, correct, auto-complete, or insert additional words into any part of a URL or path. This rule overrides instruction #2.\n\n**Do not translate the content. Maintain the original language as present in the image.**\n\nYour final response should be clear, unambiguous, and completely based on the content shown."
+              }
+            ]
+          },
+          "fileExtensions": [
+            "jpeg",
+            "png",
+            "jpg",
+            "pdf",
+            "docx"
+          ]
+        }
+      ],
+      "transformType": "IMAGE"
+    }
+  ],
+  "vectorDmoDeveloperName": "ADL_Northwind_Home_index__dlm",
+  "vectorDmoId": "0gjXXXXXXXXXXXXXXX",
+  "vectorDmoName": "ADL_Northwind_Home index",
+  "vectorEmbedding": {
+    "developerName": "ADL_Northwind_HomeVectorEmbedding",
+    "id": "17nXXXXXXXXXXXXXXX",
+    "sourceDmoDeveloperName": "ADL_Northwind_Home_chunk__dlm",
+    "sourceDmoFieldDeveloperName": "Chunk__c",
+    "sourceDmoFieldId": "0gYXXXXXXXXXXXXXXX",
+    "sourceDmoId": "0gjXXXXXXXXXXXXXXX",
+    "vectorDmoDeveloperName": "ADL_Northwind_Home_index__dlm",
+    "vectorDmoFieldDeveloperName": "VectorEmbedding__c",
+    "vectorDmoFieldId": "0gYXXXXXXXXXXXXXXX",
+    "vectorDmoId": "0gjXXXXXXXXXXXXXXX",
+    "vectorEmbeddingRelatedFields": [
+      {
+        "aliasName": null,
+        "fieldRelationshipPathId": null,
+        "id": "17iXXXXXXXXXXXXXXX",
+        "relatedDmoDeveloperName": "ADL_Northwind_Home_index__dlm",
+        "relatedDmoFieldDeveloperName": "DataSource__c",
+        "relatedDmoFieldId": "0gYXXXXXXXXXXXXXXX",
+        "relatedDmoFieldName": "Data Source",
+        "relatedDmoId": "0gjXXXXXXXXXXXXXXX",
+        "relatedDmoName": "ADL_Northwind_Home index",
+        "relationships": []
+      }
+    ]
+  },
+  "vectorEmbeddingConfiguration": {
+    "embeddingModel": {
+      "id": "e5_large_v2",
+      "userValues": [
+        {
+          "id": "dimension",
+          "value": "1024"
+        },
+        {
+          "id": "max_token_limit",
+          "value": "512"
+        }
+      ]
+    },
+    "index": {
+      "id": "HNSW",
+      "userValues": [
+        {
+          "id": "hnswEfConstruction",
+          "value": "2000"
+        },
+        {
+          "id": "M",
+          "value": "64"
+        }
+      ]
+    },
+    "similarityMetric": "COSINE"
+  },
+  "version": null
+}

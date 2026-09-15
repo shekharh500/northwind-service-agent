@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Live support specialists for Northwind web chat. Receives chats escalated by the Northwind Service Agent, and new chats when the agent is unavailable.</description>
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Northwind Live Support</name>
+    <queueRoutingConfig>NW_Messaging_Routing</queueRoutingConfig>
+    <queueSobject>
+        <sobjectType>MessagingSession</sobjectType>
+    </queueSobject>
+</Queue>

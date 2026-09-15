@@ -1,0 +1,130 @@
+# Optional fact checks for Northwind_Service_Agent, run alongside the main spec.
+#
+# Each case adds a case-sensitive "contains" string comparison on the agent's response, so the
+# answer must include the exact figure from the source document. string_comparison is used
+# instead of numeric_comparison because the figure appears inside free text.
+#
+# Run from the project root (beta command, nothing is deployed):
+#   sf agent test run-eval --spec specs/Northwind_Service_Agent-factChecks-testSpec.yaml --result-format human --target-org northwind-dev
+#
+# If the spec is deployed with `sf agent test create` and `sf agent test results` fails because
+# custom evaluations return RETRY, read the results in Testing Center instead.
+name: Northwind Service Agent Fact Checks
+description: String checks that the agent's answers contain the exact figures from the Northwind Home documents.
+subjectType: AGENT
+subjectName: Northwind_Service_Agent
+testCases:
+  # FC01 NWH-POL-001 s.2: 36 months when registered within 30 days
+  - utterance: How many months of warranty do I get if I register my device within 30 days of purchase?
+    expectedTopic: document_qa
+    expectedActions:
+      - NW_Doc_Answer_Question
+    expectedOutcome: The agent says the warranty is extended to 36 months when the device is registered within 30 days of purchase.
+    customEvaluations:
+      - label: Response contains 36 (months)
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: contains
+            isReference: false
+          - name: actual
+            value: $.generatedData.outcome
+            isReference: true
+          - name: expected
+            value: '36'
+            isReference: false
+    metrics:
+      - coherence
+      - output_latency_milliseconds
+
+  # FC02 NWH-POL-002 s.2: 15% restocking fee above $200
+  - utterance: What percentage restocking fee applies to an opened item that cost more than 200 dollars?
+    expectedTopic: document_qa
+    expectedActions:
+      - NW_Doc_Answer_Question
+    expectedOutcome: The agent says a 15% restocking fee applies to opened items priced above $200 unless defective or delivered damaged.
+    customEvaluations:
+      - label: Response contains 15 (percent)
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: contains
+            isReference: false
+          - name: actual
+            value: $.generatedData.outcome
+            isReference: true
+          - name: expected
+            value: '15'
+            isReference: false
+    metrics:
+      - coherence
+      - output_latency_milliseconds
+
+  # FC03 NWH-MAN-T200 s.5: E3 needs a 2.4 GHz network
+  - utterance: What does error E3 on the Aura T200 mean?
+    expectedTopic: document_qa
+    expectedActions:
+      - NW_Doc_Answer_Question
+    expectedOutcome: The agent says E3 means Wi-Fi authentication failed and the customer should re-enter the Wi-Fi password and confirm the network is 2.4 GHz.
+    customEvaluations:
+      - label: Response contains 2.4 (GHz)
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: contains
+            isReference: false
+          - name: actual
+            value: $.generatedData.outcome
+            isReference: true
+          - name: expected
+            value: '2.4'
+            isReference: false
+    metrics:
+      - coherence
+      - output_latency_milliseconds
+
+  # FC04 NWH-SVC-004 s.2: CarePlus Premium is $9.99 per month
+  - utterance: What is the monthly price of CarePlus Premium?
+    expectedTopic: document_qa
+    expectedActions:
+      - NW_Doc_Answer_Question
+    expectedOutcome: The agent says CarePlus Premium costs $9.99 per month (or $99 per year) per household.
+    customEvaluations:
+      - label: Response contains 9.99
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: contains
+            isReference: false
+          - name: actual
+            value: $.generatedData.outcome
+            isReference: true
+          - name: expected
+            value: '9.99'
+            isReference: false
+    metrics:
+      - coherence
+      - output_latency_milliseconds
+
+  # FC05 NWH-MAN-T200 s.5: the list includes E6 (low backup battery)
+  - utterance: List every Aura T200 error code and what it means.
+    expectedTopic: detail_finder
+    expectedActions:
+      - NW_Doc_Extract_Details
+    expectedOutcome: The agent lists error codes E1 through E6 with their meanings from the T200 manual, ending with E6 low backup battery.
+    customEvaluations:
+      - label: Response contains E6
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: contains
+            isReference: false
+          - name: actual
+            value: $.generatedData.outcome
+            isReference: true
+          - name: expected
+            value: E6
+            isReference: false
+    metrics:
+      - coherence
+      - output_latency_milliseconds
