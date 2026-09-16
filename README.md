@@ -4,7 +4,7 @@ Salesforce DX project for an Agentforce Service Agent that supports customers of
 
 The reference build runs in a Developer Edition org with the CLI alias `northwind-dev`, and its portal is at `https://<my-domain>.my.site.com/support/`. Values that identify that org are masked in this repository; see [Org-specific values](#org-specific-values).
 
-To see the build working, start with [demo.md](demo.md): the end-to-end demo with a screenshot for every step.
+To see the build working, start with [demo.md](demo.md): the end-to-end demo with a screenshot for every step. To set it up in your own org, follow [SETUP_GUIDE.md](SETUP_GUIDE.md) (also available as [SETUP_GUIDE.docx](SETUP_GUIDE.docx)).
 
 ## Architecture
 
@@ -19,6 +19,8 @@ On the portal, the Embedded Messaging component (deployment `NW_Portal_Chat`) op
 ## Repository layout
 
 ```
+SETUP_GUIDE.md / .docx         Step-by-step setup in a new org
+demo.md                        End-to-end demo with screenshots
 force-app/main/default/
   aiAuthoringBundles/          Agent Script bundle for Northwind_Service_Agent
   aiEvaluationDefinitions/     Testing Center test definition (generated from specs/)
@@ -55,7 +57,7 @@ test-results/                  JSON results of the Testing Center runs
 
 ## Deploying to a new org
 
-The full procedure, with verification and rollback for every step, is in [docs/BUILD_RUNBOOK.md](docs/BUILD_RUNBOOK.md). In outline:
+For a first setup, use [SETUP_GUIDE.md](SETUP_GUIDE.md), which walks through every step from installing the tools to the live chat test. The full procedure, with verification and rollback for every step, is in [docs/BUILD_RUNBOOK.md](docs/BUILD_RUNBOOK.md). In outline:
 
 1. Authenticate the org, fill in `config/org-values.local.env` (below) and confirm Data Cloud provisioning has finished.
 2. Create the data library from the PDFs in `docs/pdf` and wait for the retriever.
