@@ -4,7 +4,7 @@ Salesforce DX project for an Agentforce Service Agent that supports customers of
 
 The reference build runs in a Developer Edition org with the CLI alias `northwind-dev`, and its portal is at `https://<my-domain>.my.site.com/support/`. Values that identify that org are masked in this repository; see [Org-specific values](#org-specific-values).
 
-To see the build working, start with [demo.md](demo.md): the end-to-end demo with a screenshot for every step. To set it up in your own org, follow [SETUP_GUIDE.md](SETUP_GUIDE.md) (also available as [SETUP_GUIDE.docx](SETUP_GUIDE.docx)).
+To see the build working, start with [demo.md](demo.md): the end-to-end demo with a screenshot for every step. To set it up in your own org, follow [SETUP_GUIDE.md](SETUP_GUIDE.md), a point-and-click guide that uses only Salesforce Setup and the builders, with no command line or code (also available as [SETUP_GUIDE.docx](SETUP_GUIDE.docx)).
 
 ## Architecture
 
@@ -57,7 +57,7 @@ test-results/                  JSON results of the Testing Center runs
 
 ## Deploying to a new org
 
-For a first setup, use [SETUP_GUIDE.md](SETUP_GUIDE.md), which walks through every step from installing the tools to the live chat test. The full procedure, with verification and rollback for every step, is in [docs/BUILD_RUNBOOK.md](docs/BUILD_RUNBOOK.md). In outline:
+To build it by point and click in Setup and the builders, with no command line, use [SETUP_GUIDE.md](SETUP_GUIDE.md), which walks through every screen from turning on Agentforce to the live chat test. To deploy from this repository with the Salesforce CLI, follow [docs/BUILD_RUNBOOK.md](docs/BUILD_RUNBOOK.md), which has verification and rollback for every step. In outline:
 
 1. Authenticate the org, fill in `config/org-values.local.env` (below) and confirm Data Cloud provisioning has finished.
 2. Create the data library from the PDFs in `docs/pdf` and wait for the retriever.
